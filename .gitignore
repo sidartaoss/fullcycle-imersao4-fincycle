@@ -1,0 +1,7 @@
+!golang-reports-imersao/.env
+
+!imersao-fullcycle-fincycle/nestjs-api/.env
+!imersao-fullcycle-fincycle/nestjs-api/.env.example
+
+!nextjs-frontend/.env.local
+!nextjs-frontend/.env.local.example
