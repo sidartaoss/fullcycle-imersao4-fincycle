@@ -15,7 +15,32 @@ Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Po
 
 ![Imersão #4 FullCycle: Fluxo da Aplicação](imersao4-fullcycle.png)
 
-#### Keycloak
+## Tecnologias
+
+- #### Autenticação
+  - OAuth 2
+  - OpenID Connect
+  - Keycloak
+  
+- #### Backend
+  - TypeScript
+  - Nest.js
+  - Apache Kafka
+  - Golang
+  - AWS S3
+  - Kafka Connect
+  
+- #### SPA (Single Page Application)
+  - TypeScript
+  - Next.js
+  - React.js
+  
+- #### Observabilidade
+  - ElasticSearch
+  - Kibana
+  
+
+### Keycloak
 
 Outro requisito agregando complexidade ao sistema é de que deve ser _multitenancy_, o que quer dizer que o sistema deve proteger/isolar por domínios o uso dele por cada cliente. Contemplar esse requisito abrange, também, prover autenticação e autorização, o que pode ser atendido com o uso de uma ferramenta de gerenciamento de acessos e identidade, como o _Keycloak_.
 
@@ -27,18 +52,18 @@ Seguindo o fluxo desenhado do sistema, iniciamos pela tela de _login_ na aplica�
 
 A partir da autenticação, é gerado um token _JWT_ que é armazenado, pela aplicação _frontend_, em um _cookie_ no _browser_. Cada _request_ que a aplicação _frontend_ faz para a aplicação _backend_ (_nest-api_) utiliza esse _token_ para autorização. Então, de forma à aplicação _backend_ não precisar bater no Keycloak a cada request para autorizar, garantindo melhor desempenho da rede, a aplicação _backend_ recebe uma chave pública emitida pelo _Keycloak_ para validar se o _token_ é válido.
 
-#### Backend
+### Backend
 
 Com relação à aplicação _backend_. É uma aplicação desenvolvida com _NestJS_. _NestJS_ é um poderoso _framework_ _Node.js_, que vem sendo amplamente adotado nos últimos anos no mercado, apesar de ser relativamente novo (nasceu em 2017), principalmente, para construção de aplicações de microsserviços. É interessante que o _NestJS_ comporta uma _API_ específica com suporte a funcionalidades de microsserviços, como comunicação com message _brokers_, como o _RabbitMQ_, _Kafka_, etc. Ele é baseado todo no conceito de módulos e estrutura de arquitetura _MVC_ (_Model-View-Controller_), empregando algumas das idéias de arquitetura do _Angular_.
 
-#### Frontend
+### Frontend
 
 Com relação à aplicação _frontend_. É uma aplicação desenvolvida com _NextJS_. O _NextJS_ contempla um conjunto de funcionalidades já prontas de um _framework_ para incorporar à biblioteca _React_. Podemos citar, entre algumas delas, um melhor tratamento para:
 
 - O roteamento de páginas, sendo feito através da própria estrutura de pastas/arquivos da aplicação, ao invés de fazer via código;
 - Desempenho na renderização de páginas. Aí, o _NextJS_ provê algumas estratégias, como: _Server-Side-Rendering_ (_SSR_), _Client-Side-Rendering_ (_CSR_), _Static-Site-Generation_ (_SSG_). Na aplicação _frontend_, é empregado a estratégia _SSR_, que consiste em renderizar a página no servidor e entregar a página já pronta para o _browser_. Essa estratégia deve ser empregada com cautela, por ser menos performática, mas deve ser usada no caso em que os dados são muito dinâmicos, onde é necessário uma atualização mais constante da página. É o caso da página de listagem dos relatórios, em que o usuário deseja ver o _link_ do relatório processado assim que estiver disponível.
 
-#### Kafka
+### Kafka
 
 O sistema utiliza o _Apache Kafka_ como ferramenta de mensageria para comunicação entre as aplicações. Uma das razões pela escolha do _Kafka_ é que ele agrega outras funcionalidades, além do papel de _message broker_. A própria definição do _Apache Kafka_ dispõe que trata-se uma plataforma de _stream_. Assim, outra ferramenta que compõe o ecossistema _Kafka_ é o _Kafka Connect_, que pode ser usado para transportar os dados de um sistema para outro em tempo real. Para tanto, ele utiliza um conector (_source_) que puxa os dados de uma fonte de dados em um sistema origem e entrega para um tópico do _Kafka_. Então, outro conector (_sink_) lê os dados desse tópico no _Kafka_ e despeja em outra fonte de dados qualquer.
 
@@ -46,13 +71,13 @@ No momento em que o usuário cria um novo filtro de relatório de transações n
 
 Então, a aplicação _frontend_ comunica de forma síncrona com a aplicação _backend_ via _REST_. A aplicação _backend_ recebe a solicitação para persistir os dados do filtro de relatório no banco _mysql_. E, após criar um novo registro na base de dados, a aplicação de _backend_ atua como um produtor de mensagem para o _Apache Kafka_, publicando uma nova mensagem no tópico _reported.requested_.
 
-#### Elasticsearch
+### Elasticsearch
 
 Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado um novo registro no banco de dados _mysql_, o conector _mysql_ do _Kafka Connect_ puxa o dado para um tópico no _Kafka_. Então, outro conector do _Elasticsearch_ consome o dado desse tópico e despeja no banco de dados do _Elasticsearch_.
 
 É interessante que o banco de dados do _Elasticsearch_ também pode ser usado por outras aplicações, além do _Kibana_ para prover _logs_, métricas e _tracing_ (observabilidade) na forma de _dashboards_ e gráficos. No caso do sistema de controle financeiro, o _Elasticsearch_ é usado pela aplicação _Golang_ para obter os dados para compor o relatório de transações financeiras realizadas.
 
-#### Golang
+### Golang
 
 A aplicação Golang é responsável por:
 
@@ -65,4 +90,4 @@ A aplicação de _backend_, então, consome a mensagem do tópico _reports.gener
 
 A partir desse momento, o usuário pode atualizar a página de listagem de relatórios e ver que está disponível o _link_ para o relatório de transações realizadas.
 
-Uma observação importante é que todas as aplicações envolvidas rodam localmente em _conteiners_ _Docker_, o que facilita todo o processo de desenvolvimento, porque tira do desenvolvedor qualquer responsabilidade ou preocupação com a instalação de ferramentas.
+> Uma observação importante é que todas as aplicações envolvidas rodam localmente em _conteiners_ _Docker_, o que facilita todo o processo de desenvolvimento, porque tira do desenvolvedor qualquer responsabilidade ou preocupação com a instalação de ferramentas.
