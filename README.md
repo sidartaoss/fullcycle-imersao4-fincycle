@@ -1,7 +1,5 @@
 # Imersão #4 FullCycle: Fin Cycle
 
-As imersões representam, também, a síntese dos conhecimentos adquiridos ao longo do curso. Muito do que se vê e estuda nos módulos do curso é integrado ao desafio de imersão e isso é muito bom para apreender melhor como cada tecnologia se aplica dentro de uma orquestra de aplicações de microsserviços.
-
 Abaixo, consta um desenho atualizado, apresentando, de forma simplificada, como funciona o fluxo desse desafio. A princípio, aparenta ser um sistema simples de controle das transações financeiras realizadas, denominado _Fin Cycle_.
 
 ![Imersão #4 FullCycle: Fluxo da Aplicação](imersao4-fullcycle.png)
