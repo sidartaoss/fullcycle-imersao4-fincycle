@@ -2,7 +2,16 @@
 
 As imersões representam, também, a síntese dos conhecimentos adquiridos ao longo do curso. Muito do que se vê e estuda nos módulos do curso é integrado ao desafio de imersão e isso é muito bom para apreender melhor como cada tecnologia se aplica dentro de uma orquestra de aplicações de microsserviços.
 
-Abaixo, consta um desenho atualizado, apresentando, de forma simplificada, como funciona o fluxo desse desafio. A princípio, aparenta ser um sistema simples de controle de transações financeiras realizadas, denominado _Fin Cycle_. Mas, ao acrescentar alguns requisitos, o sistema ganha um peso de complexidade. Por exemplo, deve haver um cadastro de relatórios a serem solicitados ao sistema por período. Aí, já se percebe o uso de comunicação assíncrona para o processamento em _background_. Ao findar o processamento do relatório, o sistema deve disponibilizá-lo através de um _link_ na tela de listagem dos relatórios.
+Abaixo, consta um desenho atualizado, apresentando, de forma simplificada, como funciona o fluxo desse desafio. A princípio, aparenta ser um sistema simples de controle de transações financeiras realizadas, denominado _Fin Cycle_.
+
+Ao acrescentar alguns requisitos, o sistema ganha maior complexidade. Por exemplo:
+
+1. Deve haver um cadastro de relatórios a serem solicitados ao sistema por período - aí, já se percebe o uso de comunicação assíncrona para o processamento em _background_ (via _Apache Kafka_);
+2. O _Keycloak_ atua como servidor de identidade ao prover autenticação para as aplicações de _frontend_ e _backend_ (_Nest.js_);
+3. A aplicação de _backend_ notifica via _Kafka_ a aplicação _Go_ para gerar um novo relatório e armazená-lo na nuvem (_AWS S3_) e retornar uma mensagem via _Kafka_ para o _backend_;
+4. Ao finalizar o processamento do relatório, o sistema deve disponibilizá-lo através de um _link_ na tela de listagem dos relatórios (_Next.js_).
+5. O _Kafka Connect_ atua como ferramenta para integrar os dados da aplicação de _backend_ com o _ElasticSearch_;
+6. O _ElasticSearch_ atua conjuntamente com o _Kibana_ como ferramenta de observabilidade e com a aplicação _Go_ como fonte de dados.
 
 ![Imersão #4 FullCycle: Fluxo da Aplicação](imersao4-fullcycle.png)
 
@@ -47,10 +56,10 @@ Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado 
 
 A aplicação Golang é responsável por:
 
-- Consumir a mensagem do tópico _reported.requested_;
-- Gerar um arquivo no formato _Html_;
-- Fazer o _upload_ desse arquivo para um _bucket_ _S3_ na _AWS_;
-- Produzir uma nova mensagem para o tópico _reports.generated_ com a _url_ assinada (ou seja, válida por 24 horas) para o arquivo _Html_ armazenado na nuvem.
+1. Consumir a mensagem do tópico _reported.requested_;
+2. Gerar um arquivo no formato _Html_;
+3. Fazer o _upload_ desse arquivo para um _bucket_ _S3_ na _AWS_;
+4. Produzir uma nova mensagem para o tópico _reports.generated_ com a _url_ assinada (ou seja, válida por 24 horas) para o arquivo _Html_ armazenado na nuvem.
 
 A aplicação de _backend_, então, consome a mensagem do tópico _reports.generated_ e atualiza o banco de dados _mysql_ com o status de relatório Completo, ao invés de Pendente, mais a _url_ gerada.
 
