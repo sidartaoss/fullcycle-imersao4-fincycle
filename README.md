@@ -4,6 +4,8 @@ As imersões representam, também, a síntese dos conhecimentos adquiridos ao lo
 
 Abaixo, consta um desenho atualizado, apresentando, de forma simplificada, como funciona o fluxo desse desafio. A princípio, aparenta ser um sistema simples de controle das transações financeiras realizadas, denominado _Fin Cycle_.
 
+![Imersão #4 FullCycle: Fluxo da Aplicação](imersao4-fullcycle.png)
+
 Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Por exemplo:
 
 1. Deve haver um cadastro de relatórios a serem solicitados ao sistema por período - aí, já se percebe o uso de comunicação assíncrona para o processamento em _background_ (via _Apache Kafka_);
@@ -13,7 +15,8 @@ Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Po
 5. O _Kafka Connect_ atua como ferramenta para integrar os dados da aplicação de _backend_ com o _ElasticSearch_;
 6. O _ElasticSearch_ atua conjuntamente com o _Kibana_ como ferramenta de observabilidade e com a aplicação _Go_ como fonte de dados.
 
-![Imersão #4 FullCycle: Fluxo da Aplicação](imersao4-fullcycle.png)
+> Que problemas de negócio o projeto poderia resolver?
+> O projeto pode ser adaptado para casos de uso onde é necessário processar relatórios de pagamentos e transações financeiras em tempo real, como em bolsas de valores, bancos e seguradoras.
 
 ## Tecnologias
 
