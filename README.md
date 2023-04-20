@@ -4,7 +4,7 @@ As imersões representam, também, a síntese dos conhecimentos adquiridos ao lo
 
 Abaixo, consta um desenho atualizado, apresentando, de forma simplificada, como funciona o fluxo desse desafio. A princípio, aparenta ser um sistema simples de controle de transações financeiras realizadas, denominado _Fin Cycle_.
 
-Ao acrescentar alguns requisitos, o sistema ganha maior complexidade. Por exemplo:
+Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Por exemplo:
 
 1. Deve haver um cadastro de relatórios a serem solicitados ao sistema por período - aí, já se percebe o uso de comunicação assíncrona para o processamento em _background_ (via _Apache Kafka_);
 2. O _Keycloak_ atua como servidor de identidade ao prover autenticação para as aplicações de _frontend_ e _backend_ (_Nest.js_);
