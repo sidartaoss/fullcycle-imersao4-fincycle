@@ -13,8 +13,8 @@ Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Po
 5. O _Kafka Connect_ atua como ferramenta para integrar os dados da aplicação de _backend_ com o _ElasticSearch_;
 6. O _ElasticSearch_ atua conjuntamente com o _Kibana_ como ferramenta de observabilidade e com a aplicação _Go_ como fonte de dados.
 
-> Que problemas de negócio o projeto poderia resolver?
-> O projeto pode ser adaptado para casos de uso onde é necessário processar relatórios de pagamentos e transações financeiras em tempo real, como em bolsas de valores, bancos e seguradoras.
+#### Que problemas de negócio o projeto poderia resolver?
+- O projeto pode ser adaptado para casos de uso onde é necessário processar relatórios de pagamentos e transações financeiras em tempo real, como em bolsas de valores, bancos e seguradoras.
 
 ## Tecnologias
 
