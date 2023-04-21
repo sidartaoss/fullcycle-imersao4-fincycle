@@ -30,6 +30,7 @@ Ao acrescentar alguns requisitos, porém, o sistema ganha maior complexidade. Po
   - Golang
   - AWS S3
   - Kafka Connect
+  - MySQL
   
 - #### SPA (Single Page Application)
   - TypeScript
