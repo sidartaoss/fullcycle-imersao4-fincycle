@@ -83,9 +83,10 @@ Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado 
 
 A aplicação responsável pela geração dos relatórios é desenvolvida em _Go_. E adota conceitos de _design_ de Arquitetura Hexagonal (_Ports and Adapters_), _Clean Architecture_ e _Domain-Driven Design_ (_DDD_). Basicamente, consiste em:
 
-1. :arrow_right: **Trabalhar com um _design_ focado em solucionar o problema do domínio;**
-2. :arrow_right: **Deixar a complexidade técnica para a camada de infraestrutura, responsável pelo sistema de _stream_ (_Kafka_) e banco de dados (ElasticSearch);**
-3. :arrow_right: **Permanecer flexível para a implementação de outros formatos de comunicação (_API REST_, _gRPC_, _GraphQL_, etc.), sem alterar nenhum outro componente da aplicação ou o modelo de domínio.**
+1. :arrow_right: **Trabalhar com um _design_ focado em solucionar o problema do domínio.** Vamos ter uma camada de domínio responsável por resolver a complexidade do negócio; 
+2. :arrow_right: **Deixar a complexidade técnica para uma camada de infraestrutura**, que vai ser responsável por resolver o sistema de _stream_ (_Kafka_) e banco de dados (_ElasticSearch_);
+
+- Isso vai permitir adicionar à aplicação, por exemplo, outros formatos de comunicação (_REST_, _gRPC_, _GraphQL_, _CLI_, etc.), sem precisar alterar nenhum outro componente da aplicação ou o modelo de domínio.
 
 A aplicação Golang é responsável por:
 
