@@ -100,9 +100,9 @@ A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_
 
     - Vamos ter uma camada de domínio responsável por resolver a complexidade do negócio;
   
-  - #### Deixar a complexidade técnica para uma camada de aplicação;
+  - #### Deixar a complexidade técnica para uma camada de infraestrutura;
 
-    - Vamos ter uma camada de aplicação responsável por resolver o sistema de _stream_ (_Kafka_) e banco de dados (_ElasticSearch_);
+    - Vamos ter uma camada de infraestrutura responsável por resolver o sistema de _stream_ (_Kafka_) e banco de dados (_ElasticSearch_);
 
 - Isso vai possibilitar, por exemplo, adicionar outros formatos de comunicação (_REST_, _gRPC_, _GraphQL_, _CLI_, etc.), sem precisar alterar nenhum outro componente da aplicação ou o modelo de domínio.
 
