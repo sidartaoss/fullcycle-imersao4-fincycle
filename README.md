@@ -62,8 +62,17 @@ Com relação à aplicação _backend_. É uma aplicação desenvolvida com _Nes
 
 Com relação à aplicação _frontend_. É uma aplicação desenvolvida com _NextJS_. O _NextJS_ contempla um conjunto de funcionalidades já prontas de um _framework_ para incorporar à biblioteca _React_. Podemos citar, entre algumas delas, um melhor tratamento para:
 
-- O roteamento de páginas, sendo feito através da própria estrutura de pastas/arquivos da aplicação, ao invés de fazer via código;
-- Desempenho na renderização de páginas. Aí, o _NextJS_ provê algumas estratégias, como: _Server-Side-Rendering_ (_SSR_), _Client-Side-Rendering_ (_CSR_), _Static-Site-Generation_ (_SSG_). Na aplicação _frontend_, é empregado a estratégia _SSR_, que consiste em renderizar a página no servidor e entregar a página já pronta para o _browser_. Essa estratégia deve ser empregada com cautela, por ser menos performática, mas deve ser usada no caso em que os dados são muito dinâmicos, onde é necessário uma atualização mais constante da página. É o caso da página de listagem dos relatórios, em que o usuário deseja ver o _link_ do relatório processado assim que estiver disponível.
+- O roteamento de páginas; 
+
+  - Sendo feito através da própria estrutura de pastas/arquivos da aplicação, ao invés de fazer via código.
+
+- O desempenho na renderização de páginas:
+
+  - Aí, o _NextJS_ provê algumas estratégias, como: _Server-Side-Rendering_ (_SSR_), _Client-Side-Rendering_ (_CSR_), _Static-Site-Generation_ (_SSG_): 
+  
+    - Na aplicação _frontend_, é empregado a estratégia _SSR_, que consiste em renderizar a página no servidor e entregar a página já pronta para o _browser_;
+    - Essa estratégia deve ser empregada com cautela, por ser menos performática, mas deve ser usada no caso em que os dados são muito dinâmicos, onde é necessário uma atualização mais constante da página;
+    - É o caso da página de listagem dos relatórios, em que o usuário deseja ver o _link_ do relatório processado assim que estiver disponível.
 
 ### Kafka
 
