@@ -108,4 +108,6 @@ A aplicação de _backend_, então, consome a mensagem do tópico _reports.gener
 
 A partir desse momento, o usuário pode atualizar a página de listagem de relatórios e ver que está disponível o _link_ para o relatório de transações realizadas.
 
-> Uma observação importante é que todas as aplicações envolvidas rodam localmente em _conteiners_ _Docker_, o que facilita todo o processo de desenvolvimento, porque tira do desenvolvedor qualquer responsabilidade ou preocupação com a instalação de ferramentas.
+> Docker
+
+- Uma observação importante é que todas as aplicações envolvidas rodam localmente em _conteiners_ _Docker_, o que facilita todo o processo de desenvolvimento, porque tira do desenvolvedor qualquer responsabilidade ou preocupação com a instalação de ferramentas.
