@@ -80,11 +80,11 @@ O sistema utiliza o _Apache Kafka_ como ferramenta de mensageria para comunicaç
 
 No momento em que o usuário cria um novo filtro de relatório de transações no sistema, ele está solicitando, na verdade, que o sistema processe um novo relatório com as transações financeiras do período desejado.
 
-Então, a aplicação _frontend_ comunica de forma síncrona com a aplicação _backend_ via _REST_. A aplicação _backend_ recebe a solicitação para persistir os dados do filtro de relatório no banco _mysql_. E, após criar um novo registro na base de dados, a aplicação de _backend_ atua como um produtor de mensagem para o _Apache Kafka_, publicando uma nova mensagem no tópico _reported.requested_.
+Então, a aplicação _frontend_ comunica de forma síncrona com a aplicação _backend_ via _REST_. A aplicação _backend_ recebe a solicitação para persistir os dados do filtro de relatório no banco _MySQL_. E, após criar um novo registro na base de dados, a aplicação de _backend_ atua como um produtor de mensagem para o _Apache Kafka_, publicando uma nova mensagem no tópico _reported.requested_.
 
 ### Elasticsearch
 
-Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado um novo registro no banco de dados _mysql_, o conector _mysql_ do _Kafka Connect_ puxa o dado para um tópico no _Kafka_. Então, outro conector do _Elasticsearch_ consome o dado desse tópico e despeja no banco de dados do _Elasticsearch_.
+Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado um novo registro no banco de dados _MySQL_, o conector _MySQL_ do _Kafka Connect_ puxa o dado para um tópico no _Kafka_. Então, outro conector do _Elasticsearch_ consome o dado desse tópico e despeja no banco de dados do _Elasticsearch_.
 
 É interessante que o banco de dados do _Elasticsearch_ também pode ser usado por outras aplicações, além do _Kibana_ para prover _logs_, métricas e _tracing_ (observabilidade) na forma de _dashboards_ e gráficos. No caso do sistema de controle financeiro, o _Elasticsearch_ é usado pela aplicação _Golang_ para obter os dados para compor o relatório de transações financeiras realizadas.
 
@@ -94,28 +94,26 @@ A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_
 
 > Arquitetura Hexagonal / _Clean Architecture_ / _DDD_
 
-- Permite:
-
-  - #### Trabalhar com um _design_ focado em solucionar o problema do domínio;
+  - #### Permite trabalhar com um _design_ focado em solucionar o problema do domínio;
 
     - Vamos ter uma camada de domínio responsável por resolver a complexidade do negócio;
   
-  - #### Deixar a complexidade técnica para uma camada de infraestrutura;
+  - #### Permite deixar a complexidade técnica para ser resolvida por uma camada de infraestrutura;
 
     - Vamos ter uma camada de infraestrutura responsável por resolver o sistema de _stream_ (_Kafka_) e banco de dados (_ElasticSearch_);
 
 - Com isso:
 
-    - A  aplicação torna-se flexível para adicionar/remover componentes de infraestrutura sem precisar alterar nenhum outro componente da aplicação ou o modelo de domínio;
+    - A  aplicação torna-se flexível para adicionar/remover componentes de infraestrutura sem precisar alterar _nenhum_ outro componente da aplicação ou o modelo de domínio;
 
 A aplicação Golang é responsável por:
 
 1. Consumir a mensagem do tópico _reported.requested_;
-2. Gerar um arquivo no formato _Html_;
+2. Gerar um arquivo no formato _HTML_;
 3. Fazer o _upload_ desse arquivo para um _bucket_ _S3_ na _AWS_;
-4. Produzir uma nova mensagem para o tópico _reports.generated_ com a _url_ assinada (ou seja, válida por 24 horas) para o arquivo _Html_ armazenado na nuvem.
+4. Produzir uma nova mensagem para o tópico _reports.generated_ com a _URL_ assinada (ou seja, válida por 24 horas) para o arquivo _HTML_ armazenado na nuvem.
 
-A aplicação de _backend_, então, consome a mensagem do tópico _reports.generated_ e atualiza o banco de dados _mysql_ com o status de relatório Completo, ao invés de Pendente, mais a _url_ gerada.
+A aplicação de _backend_, então, consome a mensagem do tópico _reports.generated_ e atualiza o banco de dados _MySQL_ com o status de relatório Completo, ao invés de Pendente, mais a _URL_ gerada.
 
 A partir desse momento, o usuário pode atualizar a página de listagem de relatórios e ver que está disponível o _link_ para o relatório de transações realizadas.
 
