@@ -54,11 +54,11 @@ Seguindo o fluxo desenhado do sistema, iniciamos pela tela de _login_ na aplica�
 
 A partir da autenticação, é gerado um token _JWT_ que é armazenado, pela aplicação _frontend_, em um _cookie_ no _browser_. Cada _request_ que a aplicação _frontend_ faz para a aplicação _backend_ (_nest-api_) utiliza esse _token_ para autorização. Então, de forma à aplicação _backend_ não precisar bater no Keycloak a cada request para autorizar, garantindo melhor desempenho da rede, a aplicação _backend_ recebe uma chave pública emitida pelo _Keycloak_ para validar se o _token_ é válido.
 
-### Backend
+### Backend Nest.js
 
 Com relação à aplicação _backend_. É uma aplicação desenvolvida com _NestJS_. _NestJS_ é um poderoso _framework_ _Node.js_, que vem sendo amplamente adotado nos últimos anos no mercado, apesar de ser relativamente novo (nasceu em 2017), principalmente, para construção de aplicações de microsserviços. É interessante que o _NestJS_ comporta uma _API_ específica com suporte a funcionalidades de microsserviços, como comunicação com message _brokers_, como o _RabbitMQ_, _Kafka_, etc. Ele é baseado todo no conceito de módulos e estrutura de arquitetura _MVC_ (_Model-View-Controller_), empregando algumas das idéias de arquitetura do _Angular_.
 
-### Frontend
+### Frontend Next.js
 
 Com relação à aplicação _frontend_. É uma aplicação desenvolvida com _NextJS_. O _NextJS_ contempla um conjunto de funcionalidades já prontas de um _framework_ para incorporar à biblioteca _React_. Podemos citar, entre algumas delas, um melhor tratamento para:
 
