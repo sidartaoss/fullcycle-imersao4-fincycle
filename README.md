@@ -112,7 +112,7 @@ A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_
     
       > 12 Fatores
 
-        - Trata-se do mesmo objetivo proposto na metodologia dos 12 fatores. O fator 4 recomenda tratar serviços de apoio como recursos anexados. Basicamente, deveria ser possível anexar/desanexar qualquer serviço local ou de terceiros, como o banco de dados, sem realizar quaisquer mudanças no código da aplicação.
+        - Trata-se do mesmo objetivo a ser alcançado pelo fator 4 da metodologia dos 12 fatores. Esse fator recomenda tratar serviços de apoio como recursos anexados. Basicamente, deveria ser possível anexar/desanexar qualquer serviço local ou de terceiros, como o banco de dados, sem realizar quaisquer mudanças no código da aplicação.
 
 A aplicação Golang é responsável por:
 
