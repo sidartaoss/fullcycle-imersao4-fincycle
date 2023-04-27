@@ -90,9 +90,13 @@ Também acontece a atuação do _Kafka Connect_ nesse momento: quando é criado 
 
 ### Golang
 
-A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_. E adota conceitos de _design_ de Arquitetura Hexagonal (_Ports and Adapters_), _Clean Architecture_ e _Domain-Driven Design_ (_DDD_):
+A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_. E adota conceitos de _design_ de:
 
-> Arquitetura Hexagonal / _Clean Architecture_ / _DDD_
+> Arquitetura Hexagonal
+
+> _Clean Architecture_
+
+> _DDD_
 
   - #### Permite trabalhar com um _design_ focado em solucionar o problema do domínio;
 
@@ -102,9 +106,13 @@ A aplicação encarregada pela geração dos relatórios é desenvolvida em _Go_
 
     - Vamos ter uma camada de infraestrutura responsável por resolver o sistema de _stream_ (_Kafka_) e banco de dados (_ElasticSearch_);
 
-- Com isso:
+  - Com isso:
 
-    - A  aplicação torna-se flexível para adicionar/remover componentes de infraestrutura sem precisar alterar _nenhum_ outro componente da aplicação ou o modelo de domínio;
+    - #### A  aplicação torna-se flexível para adicionar/remover componentes de infraestrutura sem precisar alterar _nenhum_ outro componente da aplicação ou o modelo de domínio;
+    
+      > 12 Fatores
+
+        - Trata-se do mesmo objetivo proposto na metodologia dos 12 fatores. O fator 4 recomenda tratar serviços de apoio como recursos anexados. Basicamente, deveria ser possível anexar/desanexar qualquer serviço local ou de terceiros, como o banco de dados, sem realizar quaisquer mudanças no código da aplicação.
 
 A aplicação Golang é responsável por:
 
